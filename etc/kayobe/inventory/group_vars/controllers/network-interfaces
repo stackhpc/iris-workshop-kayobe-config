@@ -4,10 +4,11 @@
 
 # Controller interface on all-in-one network.
 aio_interface: breth0
-# Use eth0 if it exists, otherwise the bridge will have no ports.
-aio_bridge_ports: "{{ ['eth0'] if 'ansible_eth0' in hostvars[inventory_hostname] else [] }}"
-# Use the seed as a gateway.
-aio_gateway: 192.168.33.5
+aio_bridge_ports:
+  - eth0
+
+# Route via the seed-hypervisor to the outside world.
+aio_gateway: 192.168.33.4
 
 ###############################################################################
 # Dummy variable to allow Ansible to accept this file.
