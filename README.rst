@@ -34,7 +34,7 @@ Usage
    # Clone Kayobe.
    git clone https://git.openstack.org/openstack/kayobe.git
    cd kayobe
-   git fetch https://git.openstack.org/openstack/kayobe refs/changes/73/634273/1 && git checkout FETCH_HEAD
+   git fetch https://git.openstack.org/openstack/kayobe refs/changes/74/634274/1 && git checkout FETCH_HEAD
 
    # Clone this Kayobe configuration.
    mkdir -p config/src
@@ -61,7 +61,7 @@ Usage
    # Clone the Tenks repository, deploy some VMs for the controller and compute node.
    git clone https://git.openstack.org/openstack/tenks.git
    cd tenks
-   git fetch https://git.openstack.org/openstack/tenks refs/changes/00/633900/2 && git checkout FETCH_HEAD
+   git fetch https://git.openstack.org/openstack/tenks refs/changes/51/634251/1 && git checkout FETCH_HEAD
    cd ..
    # NOTE: Make sure to use ./tenks, since just ‘tenks’ will install via PyPI.
    export TENKS_CONFIG_PATH=config/src/kayobe-config/tenks.yml
