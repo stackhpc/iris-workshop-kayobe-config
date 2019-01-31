@@ -12,7 +12,7 @@ seed
 #controller0
 
 [compute:children]
-controllers
+#controllers
 
 [baremetal-compute]
 # Add baremetal compute nodes here if required.
