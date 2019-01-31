@@ -3,5 +3,5 @@
 create_ipa_image: false
 download_ipa: true
 
-# Don't build a disk image. It takes time and can be unreliable.
-use_cirros: true
+# Build a CentOS7 image.
+use_cirros: false
