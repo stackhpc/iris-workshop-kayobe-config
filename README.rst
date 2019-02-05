@@ -34,7 +34,8 @@ Usage
    # Clone Kayobe.
    git clone https://git.openstack.org/openstack/kayobe.git
    cd kayobe
-   git fetch https://git.openstack.org/openstack/kayobe refs/changes/74/634274/1 && git checkout FETCH_HEAD
+   # Fetch a patch with support for configuring a Yum proxy.
+   git fetch https://git.openstack.org/openstack/kayobe refs/changes/88/634788/3 && git checkout FETCH_HEAD
 
    # Clone this Kayobe configuration.
    mkdir -p config/src
