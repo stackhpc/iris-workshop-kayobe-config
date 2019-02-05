@@ -76,7 +76,26 @@ Usage
    source config/src/kayobe-config/etc/kolla/public-openrc.sh
    kayobe overcloud post configure
 
-   TODO: register resources, create a VM.
+   # At this point it should be possible to access the Horizon GUI via the seed
+   # hypervisor's floating IP address, using port 80 (achieved through port
+   # forwarding).
+
+   # Note that when accessing the VNC console of an instance via Horizon, you
+   # will be sent to the internal IP address of the controller, 192.168.33.2,
+   # which will fail. Replace this with the floating IP of the seed hypervisor
+   # VM.
+
+   # The following script will register some resources in OpenStack to enable
+   # booting up a tenant VM.
+   source config/src/kayobe-config/etc/kolla/public-openrc.sh
+   ./config/src/kayobe-config/init-runonce.sh
+
+   # Following the instructions displayed by the above script, boot a VM.
+   # You'll need to have activated the ~/os-venv virtual environment.
+   source ~/os-venv/bin/activate
+   openstack server create --image cirros --flavor m1.tiny --key-name mykey --network demo-net demo1
+
+   # TODO: SSH access to VM
 
 References
 ==========
