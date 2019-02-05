@@ -6,8 +6,8 @@ set -e
 
 # IP addresses on the all-in-one Kayobe cloud network.
 # These IP addresses map to those statically configured in
-# etc/kayobe/network-allocation.yml.
-controller_ip=192.168.33.3
+# etc/kayobe/network-allocation.yml and etc/kayobe/networks.yml.
+controller_vip=192.168.33.2
 seed_hv_ip=192.168.33.4
 seed_vm_ip=192.168.33.5
 
@@ -31,5 +31,5 @@ sudo sysctl -w net.ipv4.conf.all.forwarding=1
 sudo iptables -A FORWARD -i eth0 -o braio -p tcp --syn --dport 80 -m conntrack --ctstate NEW -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o braio -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -A FORWARD -i braio -o eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination $controller_ip
-sudo iptables -t nat -A POSTROUTING -o braio -p tcp --dport 80 -d $controller_ip -j SNAT --to-source $seed_hv_private_ip
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination $controller_vip
+sudo iptables -t nat -A POSTROUTING -o braio -p tcp --dport 80 -d $controller_vip -j SNAT --to-source $seed_hv_private_ip
