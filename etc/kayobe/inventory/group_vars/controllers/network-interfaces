@@ -10,6 +10,9 @@ aio_bridge_ports:
 # Route via the seed-hypervisor to the outside world.
 aio_gateway: 192.168.33.4
 
+# Controller interface on public network. Subinterface of breth0.
+public_interface: breth0:1
+
 ###############################################################################
 # Dummy variable to allow Ansible to accept this file.
 workaround_ansible_issue_8743: yes

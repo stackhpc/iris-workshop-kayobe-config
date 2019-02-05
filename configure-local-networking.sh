@@ -8,6 +8,7 @@ set -e
 # These IP addresses map to those statically configured in
 # etc/kayobe/network-allocation.yml and etc/kayobe/networks.yml.
 controller_vip=192.168.33.2
+controller_ip=192.168.33.3
 seed_hv_ip=192.168.33.4
 seed_vm_ip=192.168.33.5
 
@@ -20,11 +21,16 @@ seed_hv_private_ip=$(ip a show dev eth0 | grep 'inet ' | awk '{ print $2 }' | se
 # 6080: VNC console
 forwarded_ports="80 6080"
 
+# IP subnet of the OpenStack 'public' network created by init-runonce.sh.
+public_cidr="10.0.2.0/24"
+
 # Configure local networking.
 # Add a bridge 'braio' for the Kayobe all-in-one cloud network.
-sudo ip l add braio type bridge
-sudo ip l set braio up
-sudo ip a add $seed_hv_ip/24 dev braio
+if ! sudo ip l show braio 2>&1 >/dev/null; then
+  sudo ip l add braio type bridge
+  sudo ip l set braio up
+  sudo ip a add $seed_hv_ip/24 dev braio
+fi
 
 # Configure IP routing and NAT to allow the seed VM and overcloud hosts to
 # route via this route to the outside world.
@@ -43,3 +49,11 @@ for port in $forwarded_ports; do
   # Source NAT.
   sudo iptables -t nat -A POSTROUTING -o braio -p tcp --dport $port -d $controller_vip -j SNAT --to-source $seed_hv_private_ip
 done
+
+# Configure an IP route to the 'public' network on the controller.
+sudo ip r add $public_cidr via $controller_ip
+
+echo
+echo "NOTE: The network configuration applied by this script is not"
+echo "persistent across reboots."
+echo "If you reboot the system, please re-run this script."
