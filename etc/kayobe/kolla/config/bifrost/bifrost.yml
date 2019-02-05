@@ -3,5 +3,6 @@
 create_ipa_image: false
 download_ipa: true
 
-# Build a CentOS7 image.
-use_cirros: false
+# Use a locally hosted CentOS7 cloud image.
+use_cirros: true
+cirros_deploy_image_upstream_url: "http://{{ proxy_ip }}/CentOS-7-x86_64-GenericCloud.qcow2"
