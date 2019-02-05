@@ -39,7 +39,7 @@ Usage
    # Clone this Kayobe configuration.
    mkdir -p config/src
    cd config/src/
-   git clone https://github.com/stackhpc/iris-workshop-kayobe-config.git kayobe-config
+   git clone https://github.com/stackhpc/iris-workshop-kayobe-config.git -b scenario1 kayobe-config
 
    ./kayobe-config/configure-local-networking.sh
 
