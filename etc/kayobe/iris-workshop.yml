@@ -1,3 +1,6 @@
 ---
 # IP address of the proxy server.
 proxy_ip: "{{ lookup('pipe', 'getent ahostsv4 registry.local').split(' ') | first }}"
+
+# Don't reboot the controller to apply an SELinux mode change.
+disable_selinux_do_reboot: false
