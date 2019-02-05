@@ -55,9 +55,6 @@ Usage
 
    # Clone the Tenks repository, deploy some VMs for the controller and compute node.
    git clone https://git.openstack.org/openstack/tenks.git
-   cd tenks
-   git fetch https://git.openstack.org/openstack/tenks refs/changes/51/634251/1 && git checkout FETCH_HEAD
-   cd ..
    # NOTE: Make sure to use ./tenks, since just ‘tenks’ will install via PyPI.
    export TENKS_CONFIG_PATH=config/src/kayobe-config/tenks.yml
    ./dev/tenks-deploy.sh ./tenks
