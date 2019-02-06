@@ -83,11 +83,6 @@ aio_inspection_allocation_pool_end: 192.168.33.254
 aio_vip_address: 192.168.33.2
 aio_mtu: 1450
 
-# Public network, used for external access to/from the instances.
-public_cidr: 10.0.2.0/24
-public_allocation_pool_start: 10.0.2.1
-public_allocation_pool_end: 10.0.2.3
-
 ###############################################################################
 # Network virtual patch link configuration.
 

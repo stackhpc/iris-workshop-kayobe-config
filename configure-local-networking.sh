@@ -19,16 +19,11 @@ controller_private_ip=$(ip a show dev eth0 | grep 'inet ' | awk '{ print $2 }' |
 # 6080: VNC console
 forwarded_ports="80 6080"
 
-# IP subnet of the OpenStack 'public' network created by init-runonce.sh.
-public_cidr="10.0.2.0/24"
-
 # Configure local networking.
 # Add a bridge 'breth1' for the Kayobe all-in-one cloud network.
-if ! sudo ip l show breth1 2>&1 >/dev/null; then
-  sudo ip l add breth1 type bridge
-  sudo ip l set breth1 up
-  sudo ip a add $controller_ip/24 dev breth1
-fi
+sudo ip l add breth1 type bridge
+sudo ip l set breth1 up
+sudo ip a add $controller_ip/24 dev breth1
 
 # Configure IP routing and NAT to allow deployed instances to route to the
 # outside world.
@@ -47,8 +42,3 @@ for port in $forwarded_ports; do
   # Source NAT.
   sudo iptables -t nat -A POSTROUTING -o breth1 -p tcp --dport $port -d $controller_vip -j SNAT --to-source $controller_private_ip
 done
-
-echo
-echo "NOTE: The network configuration applied by this script is not"
-echo "persistent across reboots."
-echo "If you reboot the system, please re-run this script."
