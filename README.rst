@@ -93,7 +93,13 @@ Usage
    source ~/os-venv/bin/activate
    openstack server create --image cirros --flavor m1.tiny --key-name mykey --network demo-net demo1
 
-   # TODO: SSH access to VM
+   # Assign a floating IP to the server to make it accessible.
+   openstack floating ip create public1
+   fip=$(openstack floating ip list -f value -c 'Floating IP Address' --status DOWN | head -n 1)
+   openstack server add floating ip demo1 $fip
+
+   # Check SSH access to the VM.
+   ssh cirros@$fip
 
 References
 ==========
