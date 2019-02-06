@@ -50,7 +50,7 @@ for port in $forwarded_ports; do
 done
 
 # Configure an IP on the 'public' network to allow access to/from the cloud.
-sudo ip a add $public_ip/24 dev braio1
+sudo ip a add $public_ip/24 dev braio
 
 echo
 echo "NOTE: The network configuration applied by this script is not"
